@@ -46,16 +46,16 @@ namespace Library_Management_System
             while (isOpen)
             {
                 Console.WriteLine("Hoşgeldiniz");
-                Console.WriteLine("Yapmak istediğiniz işlemi seçiniz ");
+                Console.WriteLine("Yapmak istediğiniz işlemi seçiniz: ");
 
                 Console.WriteLine("1: Tüm kitapları görüntüle");
                 Console.WriteLine("2: Kitap Ekle");
                 Console.WriteLine("3: Kitap ismi ara");
                 Console.WriteLine("4: ödünç verilebilir kitaplar:");
                 Console.WriteLine("5: Kitap Ödünç verme");
-                Console.WriteLine("6: Ödünç alınan kitapları ekrana yazdır:");
+                Console.WriteLine("6: Ödünç alınan kitapları ekrana yazdır");
                 Console.WriteLine("7: Kitap iadesi yap");
-                Console.WriteLine("8: Son teslim tarihi geçmiş kitaplar:");
+                Console.WriteLine("8: Son teslim tarihi geçmiş kitaplar");
                 Console.WriteLine("9: Çıkış");
 
                 String choose = Console.ReadLine();
@@ -118,16 +118,16 @@ namespace Library_Management_System
 
         private static void AddBook(Library library)
         {
-            Console.WriteLine("Title:");
+            Console.WriteLine("Kitap Adı:");
             string title = Console.ReadLine();
 
-            Console.WriteLine("Author:");
+            Console.WriteLine("Yazar:");
             string author = Console.ReadLine();
 
             Console.WriteLine("ISBN:");
             string isbn = Console.ReadLine();
 
-            Console.WriteLine("CopyCount:");
+            Console.WriteLine("Kopya Sayısı:");
             if (int.TryParse(Console.ReadLine(), out int copyCount))
             {
 
@@ -149,7 +149,7 @@ namespace Library_Management_System
             }
             else
             {
-                Console.WriteLine("Hatalı giriş! Lütfen tam sayı giriniz");
+                Console.WriteLine("Hatalı giriş! Lütfen tam sayı giriniz:");
             }
 
         }
@@ -160,7 +160,7 @@ namespace Library_Management_System
             Book foundBook = library.FindBookWithTitle(titleNameToFind);
             if (foundBook != null)
             {
-                Console.WriteLine("kitap bulundu" + foundBook.Title);
+                Console.WriteLine("Kitap mevcut:" + foundBook.Title + ", Kopya sayısı: " + foundBook.CopyCount);
 
             }
             else
@@ -335,11 +335,11 @@ namespace Library_Management_System
             {
                 if(book.dueDate == DateTime.MinValue)
                 {
-                    Console.WriteLine($"Author:{book.Author}, " +
-                    $"Title:{book.Title}, " +
-                    $"ISBN:{book.ISBN}," +
-                    $"CopyCount:{book.CopyCount},"+
-                    $"borrowedCount:{book.borrowedCount},");
+                    Console.WriteLine($"Yazar:{book.Author}, " +
+                    $"Kitap Adı:{book.Title}, " +
+                    $"ISBN:{book.ISBN}, " +
+                    $"Kopya Sayısı:{book.CopyCount}, "+
+                    $"Ödünç Alınan:{book.borrowedCount}, ");
                 }
                 
             }
@@ -351,10 +351,10 @@ namespace Library_Management_System
         {
             foreach (var book in borrowedBooks)
             {
-                Console.WriteLine($"Author:{book.Author}, " +
-                    $"Title:{book.Title}, " +
-                    $"ISBN:{book.ISBN}," +
-                   $"CopyCount:{book.CopyCount}");
+                Console.WriteLine($"Yazar:{book.Author}, " +
+                    $"Kitap Adı:{book.Title}, " +
+                    $"ISBN:{book.ISBN}, " +
+                   $"Kopya Sayısı:{book.CopyCount}");
             }
 
             if (borrowedBooks.Count == 0)
@@ -367,10 +367,10 @@ namespace Library_Management_System
         {
             foreach (var book in accessableBooks)
             {
-                Console.WriteLine($"Author:{book.Author}, " +
-                    $"Title:{book.Title}, " +
-                    $"ISBN:{book.ISBN}," +
-                     $"CopyCount:{book.CopyCount}");
+                Console.WriteLine($"Yazar:{book.Author}, " +
+                    $"Kitap Adı:{book.Title}, " +
+                    $"ISBN:{book.ISBN}, " +
+                    $"Kopya Sayısı:{book.CopyCount}");
             }
         }
         /// <summary>
@@ -465,14 +465,14 @@ namespace Library_Management_System
             if (existingBook != null)
             {
                 existingBook.CopyCount += newBook.CopyCount;
-                Console.WriteLine("Var olan bir kitap eklendi.Kopya sayısı arttırıldı.");
+                Console.WriteLine("Var olan bir kitap eklendi. Kopya sayısı arttırıldı.");
 
 
             }
             else
             {
                 allBooks.Add(newBook);
-                Console.WriteLine("Yeni kitap ekleme işlemi başarıyla gerçekleşti");
+                Console.WriteLine("Yeni kitap ekleme işlemi başarıyla gerçekleşti.");
             }
 
 
@@ -491,10 +491,10 @@ namespace Library_Management_System
             {
                 if (book.dueDate < currentDate)
                 {
-                    Console.WriteLine($"Author:{book.Author}, " +
-                                      $"Title:{book.Title}, " +
+                    Console.WriteLine($"Yazar:{book.Author}, " +
+                                      $"Kitap Adı:{book.Title}, " +
                                       $"ISBN:{book.ISBN}, " +
-                                      $"Due Date:{book.dueDate}");
+                                      $"Teslim Tarihi:{book.dueDate}");
                 }
             }
         }
@@ -504,7 +504,7 @@ namespace Library_Management_System
             if (existingBook != null)
             {
                 existingBook.CopyCount += newBook.CopyCount;
-                Console.WriteLine("Var olan bir kitap eklendi.Kopya sayısı arttırıldı.");
+                Console.WriteLine("Var olan bir kitap eklendi. Kopya sayısı arttırıldı.");
 
                 // Var olan kitabın kopya sayısı arttığı için accessableBooks listesine ekleniyor.
 
@@ -526,7 +526,7 @@ namespace Library_Management_System
                     {
                         // accessableBooks listesinde olmayan bir kitap, listeye ekle
                         accessableBooks.Add(newBook);
-                        Console.WriteLine("A new book was added.");
+                        Console.WriteLine("Yeni kitap eklendi.");
                     }
                 }
 
@@ -542,7 +542,7 @@ namespace Library_Management_System
                 accessableBooks.Add(newBook);
 
 
-                Console.WriteLine("A new book was added.");
+                Console.WriteLine("Yeni kitap eklendi.");
             }
         }
 
@@ -561,10 +561,10 @@ namespace Library_Management_System
                 using (StreamWriter sw = new StreamWriter(filePath, true)) //File.AppendText(file_path))
                 {
                     sw.WriteLine($"{book.Author}, " +
-                                $"{book.Title}," +
-                                $"{book.ISBN}," +
-                                $"{book.CopyCount}," +
-                                $"{book.borrowedCount}," +
+                                $"{book.Title}, " +
+                                $"{book.ISBN}, " +
+                                $"{book.CopyCount}, " +
+                                $"{book.borrowedCount}, " +
                                 $"{book.dueDate}"
 
                                 );
