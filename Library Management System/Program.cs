@@ -209,7 +209,7 @@ namespace Library_Management_System
 
     public class Library
     {
-        public string filePath = @" C:\LibraryManagementSystem.txt\Libarary1.txt";
+        public string filePath = @" C:\LibraryManagementData\Library1.txt";
         public List<Book> allBooks;
         public List<Book> borrowedBooks;
         public List<Book> accessableBooks;
@@ -228,7 +228,7 @@ namespace Library_Management_System
                 Author = willCopy.Author,
                 Title = willCopy.Title,
 
-                CopyCount = willCopy.borrowedCount,
+                CopyCount = willCopy.CopyCount,
                 borrowedCount = willCopy.borrowedCount,
                 dueDate = willCopy.dueDate
 
@@ -333,10 +333,15 @@ namespace Library_Management_System
             // Kitapları ekrana yazdırmak için:
             foreach (var book in allBooks)
             {
-                Console.WriteLine($"Author:{book.Author}, " +
+                if(book.dueDate == DateTime.MinValue)
+                {
+                    Console.WriteLine($"Author:{book.Author}, " +
                     $"Title:{book.Title}, " +
                     $"ISBN:{book.ISBN}," +
-                    $"CopyCount:{book.CopyCount}");
+                    $"CopyCount:{book.CopyCount}," +
+                    $"borrowedCount:{book.borrowedCount},");
+                }
+                
             }
         }
         /// <summary>
@@ -371,17 +376,21 @@ namespace Library_Management_System
         {
             if (book.CopyCount > 0)
             {
-
-
                 int index = accessableBooks.IndexOf(book);
                 accessableBooks[index].CopyCount--; //1 kopya ödünç verildiği için kopya sayısını azalt
 
-                Book borrowedBook = book;
+                Book borrowedBook = CopyBook(book);
                 borrowedBook.dueDate = DateTime.Now.AddDays(7);
+                borrowedBook.CopyCount = 1;
+                borrowedBook.borrowedCount = 1;
                 borrowedBooks.Add(borrowedBook);
 
-                int index2 = allBooks.IndexOf(book);
-                allBooks[index2].borrowedCount++;
+
+                Book baseBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim());
+
+                baseBook.borrowedCount++;
+
+                allBooks.Add(borrowedBook);
 
 
             }
