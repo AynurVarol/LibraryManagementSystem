@@ -10,14 +10,15 @@ Bu uygulama, C# kullanarak yapılmış basit bir kütüphane yönetim sistemi ko
 - Ödünç alınmış kitabın geri iade işlemini yapabilme 
 - Teslim tarihi geçmiş kitapları görüntüleme
 - Çıkış 
-## Nasıl Kullanılır?
-BU TXT C KONUMUNDAN ALIN
+## Kurulum
+
 1. Proje dosyasını indirin.
-2.Proje dizinindeki terminal istemcisini açın.
+2. LibraryManagementData klasörünü C:\ yoluna kopyalayın.
+3. Proje dizinindeki terminal istemcisini açın.
 3. `donet run` komutunu kullanarak uygulamayı başlatın.
 4. Menüden gerekli numaralara basarak yapmak istediğiniz işlemi seçin.
 ## Önemli Notlar
--Kitap bilgileri, bir metin dosyasında saklanmaktadır.(`C:\LibraryManagementSystem.txt\Libarary1.txt `).
+-Kitap bilgileri, bir metin dosyasında saklanmaktadır.(`C:\LibraryManagementData\Library1.txt `).
 - Uygulamadan çıkış yapıldığında eklenen bilgiler otomatik olarak kaydedilir.
 ## Geliştirme Aşaması
 - Uygulama içinde `Library`, `Book` ve `Program` adında üç sınıf bulunuyor.
