@@ -1,4 +1,2 @@
-Yu Hua, Yaşamak,1010121,5,3,3.02.2024 20:48:51
-Sebahattin Ali, Kürk Mantolu Madonna, 201011,3, 0,0
-John Steinbeck, Gazap Üzümleri, 201014,5, 0,0
-
+Yu Hua,  Yaşamak,1010121,5,3,1.01.0001 00:00:00
+John Steinbeck, Gazap Üzümleri,1010122,7,0,1.01.0001 00:00:00
