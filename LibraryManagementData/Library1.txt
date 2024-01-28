@@ -1,2 +1,3 @@
-Yu Hua,  Yaşamak,1010121,5,3,1.01.0001 00:00:00
-John Steinbeck, Gazap Üzümleri,1010122,7,0,1.01.0001 00:00:00
+Yu Hua, Yaşamak,1111,2,0,1.01.0001 00:00:00
+Stefan Zweig, Satranç,1112,3,0,1.01.0001 00:00:00
+Mustafa Kemal Atatürk, Nutuk,1113,5,0,1.01.0001 00:00:00
