@@ -11,7 +11,7 @@ namespace Library_Management_System
         AddBook = 1,
         FindBook = 2,
         PrintAccesableBooks = 3, //ödünç verilebilir kitapları ekrana yazdır
-        ToLendBooks = 4, //ÖDÜNÇ KİTAp
+        ToLendBooks = 4, //Ödünç Kitap
         PrintBorrowedBooks = 5,//ödünç kitapları ekrana yazdır
         BookReturn = 6,//iade
         OverdueBooks = 7,//teslimi geçmiş
@@ -355,6 +355,11 @@ namespace Library_Management_System
                     $"Title:{book.Title}, " +
                     $"ISBN:{book.ISBN}," +
                    $"CopyCount:{book.CopyCount}");
+            }
+
+            if (borrowedBooks.Count == 0)
+            {
+                Console.WriteLine("Ödünç alınmış bir kitap yok.");
             }
 
         }
