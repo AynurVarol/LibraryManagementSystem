@@ -1,7 +1,7 @@
 # LibraryManagementSystem
 Bu uygulama, C# kullanarak yapılmış basit bir kütüphane yönetim sistemi konsol uygulamasıdır.
 ## Uygulama Özellikleri
--Tüm kitapalrı görüntüleme
+-Tüm kitapları görüntüleme
 - Kütüphaneye yeni bir kitap ekleme
 - Kütüphanede kitap ismi ile arama yapabilme
 - Kütüphanede ödünç verilebilir durumdaki kitapları görüntüleyebilme
