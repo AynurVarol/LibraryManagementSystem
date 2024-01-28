@@ -338,7 +338,7 @@ namespace Library_Management_System
                     Console.WriteLine($"Author:{book.Author}, " +
                     $"Title:{book.Title}, " +
                     $"ISBN:{book.ISBN}," +
-                    $"CopyCount:{book.CopyCount}," +
+                    $"CopyCount:{book.CopyCount},"+
                     $"borrowedCount:{book.borrowedCount},");
                 }
                 
@@ -376,6 +376,8 @@ namespace Library_Management_System
         {
             if (book.CopyCount > 0)
             {
+
+
                 int index = accessableBooks.IndexOf(book);
                 accessableBooks[index].CopyCount--; //1 kopya ödünç verildiği için kopya sayısını azalt
 
@@ -387,7 +389,7 @@ namespace Library_Management_System
 
 
                 Book baseBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim());
-
+               
                 baseBook.borrowedCount++;
 
                 allBooks.Add(borrowedBook);
