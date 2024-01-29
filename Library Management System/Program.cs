@@ -43,9 +43,9 @@ namespace Library_Management_System
             ChooseType type = ChooseType.ShowAllBooks;
 
             bool isOpen = true;
+            bool isInputInteger = false;
             while (isOpen)
             {
-                Console.WriteLine("Hoşgeldiniz");
                 Console.WriteLine("Yapmak istediğiniz işlemi seçiniz: ");
 
                 Console.WriteLine("1: Tüm kitapları görüntüle");
@@ -60,14 +60,18 @@ namespace Library_Management_System
                 Console.WriteLine("10: Çıkış yap");
 
                 String choose = Console.ReadLine();
-
                 int typeInt = Convert.ToInt32(choose);
                 type = (ChooseType)(typeInt - 1);
+
 
                 // string lendingBookTitle;
 
                 switch (type)
                 {
+                    default:
+                        Console.WriteLine("Girdiğiniz değere ait işlem bulunmamakta! Lütfen işlem numarasını kontrol ediniz." + System.Environment.NewLine);
+                        break;
+
                     case ChooseType.ShowAllBooks:
                         library.PrintAllBooks();
                         break;
@@ -114,6 +118,8 @@ namespace Library_Management_System
                     case ChooseType.Exit:
                         isOpen = false;
                         break;
+
+                    
                 }
 
 
@@ -438,6 +444,7 @@ namespace Library_Management_System
 
                 Book baseBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim());
                 baseBook.borrowedCount++;
+                baseBook.CopyCount--;
 
                 allBooks.Add(borrowedBook);
 
@@ -462,23 +469,17 @@ namespace Library_Management_System
             allBooks.Remove(borrowedBook);
             Book baseBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim() && book2.dueDate == DateTime.MinValue);
             baseBook.borrowedCount--;
+            baseBook.CopyCount++;
 
             Book accessableBook = accessableBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim());
 
-            if (accessableBook != null )
+            if (accessableBook != null && accessableBook.CopyCount - accessableBook.borrowedCount <= 0)
             {
-               
-                accessableBook.borrowedCount--;
-
-                if (accessableBook.CopyCount - accessableBook.borrowedCount <= 0)
-                {
-                    accessableBooks.Remove(accessableBook);
-
-                }
+                accessableBooks.Remove(accessableBook);              
 
             }
-            Book book3 = borrowedBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim() && book2.dueDate == borrowedBook.dueDate);
-            borrowedBooks.Remove(book3);
+            Book tempBook = borrowedBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim() && book2.dueDate == borrowedBook.dueDate);
+            borrowedBooks.Remove(tempBook);
             Console.WriteLine("Kitap iade işlemi gerçekleşti");
         }
         public Book FindBookWithTitle(string name)//kitap iade için arama
