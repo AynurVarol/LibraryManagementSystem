@@ -73,7 +73,9 @@ namespace Library_Management_System
                         break;
                     case ChooseType.AddBook:
                         AddBook(library);
+                        library.SaveToTextFile();
                         break;
+
                     case ChooseType.FindBook:
                         Console.WriteLine("Arama yapmak istediğiniz kitap adını veya yazar adını girin:");
                         FindBook(library);
@@ -82,6 +84,7 @@ namespace Library_Management_System
                     case ChooseType.ToLendBooks:
                         Console.WriteLine("Ödünç verilmek istenen kitabın adını giriniz:");
                         ToLendBook(library);
+                        library.SaveToTextFile();
                         break;
 
                     case ChooseType.PrintBorrowedBooks:
@@ -91,6 +94,7 @@ namespace Library_Management_System
                     case ChooseType.BookReturn:
                         Console.WriteLine("iade istenen kitabın adını giriniz:");
                         BookReturn(library);
+                        library.SaveToTextFile();
                         break;
 
                     case ChooseType.OverdueBooks:
@@ -266,7 +270,7 @@ namespace Library_Management_System
             {
                 Author = willCopy.Author,
                 Title = willCopy.Title,
-
+                ISBN = willCopy.ISBN,
                 CopyCount = willCopy.CopyCount,
                 borrowedCount = willCopy.borrowedCount,
                 dueDate = willCopy.dueDate
@@ -393,7 +397,8 @@ namespace Library_Management_System
                 Console.WriteLine($"Yazar:{book.Author}, " +
                     $"Kitap Adı:{book.Title}, " +
                     $"ISBN:{book.ISBN}, " +
-                   $"Kopya Sayısı:{book.CopyCount}");
+                    $"Kopya Sayısı:{book.CopyCount}, " +
+                    $"Teslim Tarihi: {book.dueDate}");
             }
 
             if (borrowedBooks.Count == 0)
@@ -433,7 +438,6 @@ namespace Library_Management_System
 
 
                 Book baseBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim());
-               
                 baseBook.borrowedCount++;
 
                 allBooks.Add(borrowedBook);
@@ -455,12 +459,27 @@ namespace Library_Management_System
         /// <param name="book"></param>
         public void ReturnBook(Book book) //iade yapma
         {
+            Book borrowedBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim() && book2.dueDate != DateTime.MinValue);
+            allBooks.Remove(borrowedBook);
+            Book baseBook = allBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim() && book2.dueDate == DateTime.MinValue);
+            baseBook.borrowedCount--;
 
+            Book accessableBook = accessableBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim());
 
-            int index = accessableBooks.IndexOf(book);
-            accessableBooks[index].CopyCount++; //iade edilen kitap için kopya sayısını 1 arttır
-            borrowedBooks[index].CopyCount--;
+            if (accessableBook != null )
+            {
+               
+                accessableBook.borrowedCount--;
 
+                if (accessableBook.CopyCount - accessableBook.borrowedCount <= 0)
+                {
+                    accessableBooks.Remove(accessableBook);
+
+                }
+
+            }
+            Book book3 = borrowedBooks.FirstOrDefault(book2 => book2.Title.Trim() == book.Title.Trim() && book2.dueDate == borrowedBook.dueDate);
+            borrowedBooks.Remove(book3);
             Console.WriteLine("Kitap iade işlemi gerçekleşti");
         }
         public Book FindBookWithTitle(string name)//kitap iade için arama
