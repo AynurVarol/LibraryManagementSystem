@@ -75,7 +75,7 @@ namespace Library_Management_System
                         AddBook(library);
                         break;
                     case ChooseType.FindBook:
-                        Console.WriteLine("Aranan kitabın ismini giriniz:");
+                        Console.WriteLine("Arama yapmak istediğiniz kitap adını veya yazar adını girin:");
                         FindBook(library);
                         break;
 
@@ -160,7 +160,7 @@ namespace Library_Management_System
 
         }
 
-        private static void FindBook(Library library) //kitap ismi arama ve bulma 
+        /*private static void FindBook(Library library) //kitap ismi arama ve bulma 
         {
             string titleNameToFind = Console.ReadLine();
             Book foundBook = library.FindBookWithTitle(titleNameToFind);
@@ -173,7 +173,39 @@ namespace Library_Management_System
             {
                 Console.WriteLine("Aradığınız kitap bulunamadı.");
             }
+        }*/
+
+        /// <summary>
+        /// Kitap ismi arama, bulma ve ekrana yazdırma
+        /// </summary>
+        /// <param name="library"></param>
+        private static void FindBook(Library library) 
+        {
+         
+            string searchTerm = Console.ReadLine();
+
+            List<Book> foundBooks = library.FindBooksWithTitleOrAuthor(searchTerm);
+
+            if (foundBooks.Count > 0)
+            {
+                Console.WriteLine("Arama sonuçları:");
+
+                foreach (var book in foundBooks)
+                {
+                    Console.WriteLine($"Kitap adı: {book.Title}, Yazar: {book.Author}, Kopya sayısı: {book.CopyCount}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Aradığınız kitap veya yazar bulunamadı.");
+            }
         }
+
+
+
+
+
+
         private static void ToLendBook(Library library) //ödünç kitap verme kodunu çağırmak için 
         {
             string lendingBookTitle;
@@ -219,6 +251,7 @@ namespace Library_Management_System
         public List<Book> allBooks;
         public List<Book> borrowedBooks;
         public List<Book> accessableBooks;
+       
 
 
         public Library()
@@ -430,7 +463,7 @@ namespace Library_Management_System
 
             Console.WriteLine("Kitap iade işlemi gerçekleşti");
         }
-        public Book FindBookWithTitle(string name)//kitap arama
+        public Book FindBookWithTitle(string name)//kitap iade için arama
         {
             foreach (var book in allBooks)
             {
@@ -442,13 +475,15 @@ namespace Library_Management_System
             return null;
         }
 
-       
+
         /// <summary>
         /// kitap ve yazar ismine göre arama yapma
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public Book FindBookWithAuthor(string name)
+        /// 
+
+        /*public Book FindBookWithAuthor(string name)
         {
             foreach (var book in allBooks)
             {
@@ -458,6 +493,20 @@ namespace Library_Management_System
                 }
             }
             return null;
+        }*/
+        public List<Book> FindBooksWithTitleOrAuthor(string searchTerm) 
+        {
+            List<Book> foundBooks = new List<Book>();
+
+            foreach (var book in allBooks)
+            {
+                if (book.Title.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0 || book.Author.IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    foundBooks.Add(book);
+                }
+            }
+
+            return foundBooks;
         }
 
         /// <summary>
