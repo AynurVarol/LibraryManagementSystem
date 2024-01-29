@@ -112,7 +112,6 @@ namespace Library_Management_System
 
 
                     case ChooseType.Exit:
-                        library.SaveToTextFile();
                         isOpen = false;
                         break;
                 }
