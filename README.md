@@ -19,8 +19,7 @@ Bu uygulama, C# kullanarak yapılmış basit bir kütüphane yönetim sistemi ko
 
 ## Önemli Notlar
 - Kitap bilgileri, bir metin dosyasında saklanmaktadır.(`C:\LibraryManagementData\Library1.txt `).
-- Uygulamada yapılan değişiklikler `Kaydet` seçeneği ile kaydedilir.
-- Uygulamadan çıkış yapıldığında da eklenen bilgiler otomatik olarak kaydedilir.
+- Uygulamada her işlem, yapılan değişiklikleri kaydeder, opsiyonel olarak kayıt butonu da vardır.
 ## Geliştirme Aşaması
 - Uygulama içinde `Library`, `Book` ve `Program` adında üç sınıf bulunuyor.
 - `Book` sınıfı, kitabın başlığı, yazarı, ISBN, kopya sayısı, ödünç alındığı tarih ve ödünç alınan kopya sayısı gibi bilgileri içerir. Bu sınıfın nesneleri, `Library` sınıfındaki listelerde kullanılarak kütüphane yönetimi işlemlerini gerçekleştirir.
