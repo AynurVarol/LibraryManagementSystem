@@ -15,8 +15,8 @@ namespace Library_Management_System
         PrintBorrowedBooks = 5,//ödünç kitapları ekrana yazdır
         BookReturn = 6,//iade
         OverdueBooks = 7,//teslimi geçmiş
-
-        Exit = 8
+        Save = 8,
+        Exit = 9
     }
 
     public class Book
@@ -56,7 +56,8 @@ namespace Library_Management_System
                 Console.WriteLine("6: Ödünç alınan kitapları ekrana yazdır");
                 Console.WriteLine("7: Kitap iadesi yap");
                 Console.WriteLine("8: Son teslim tarihi geçmiş kitaplar");
-                Console.WriteLine("9: Çıkış");
+                Console.WriteLine("9: Kaydet");
+                Console.WriteLine("10: Çıkış yap");
 
                 String choose = Console.ReadLine();
 
@@ -100,6 +101,11 @@ namespace Library_Management_System
                         Console.WriteLine("Ödünç alabileceğiniz kitaplar:");
                         library.PrintAccesableBooks();
                         break;
+
+                    case ChooseType.Save:
+                        library.SaveToTextFile();
+                        break;
+
 
                     case ChooseType.Exit:
                         library.SaveToTextFile();
