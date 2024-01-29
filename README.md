@@ -3,12 +3,13 @@ Bu uygulama, C# kullanarak yapılmış basit bir kütüphane yönetim sistemi ko
 ## Uygulama Özellikleri
 - Tüm kitapları görüntüleme
 - Kütüphaneye yeni bir kitap ekleme
-- Kütüphanede kitap ismi ile arama yapabilme
+- Kütüphanede kitap ya da yazar ismi ile arama yapabilme
 - Kütüphanede ödünç verilebilir durumdaki kitapları görüntüleyebilme
 - Kitap ödünç verme 
 - Ödünç verilmiş olan kitapları görüntüleyebilme
 - Ödünç alınmış kitabın geri iade işlemini yapabilme 
 - Teslim tarihi geçmiş kitapları görüntüleme
+- Bilgileri kaydetme.
 - Çıkış 
 ## Kurulum
 
@@ -18,7 +19,8 @@ Bu uygulama, C# kullanarak yapılmış basit bir kütüphane yönetim sistemi ko
 
 ## Önemli Notlar
 - Kitap bilgileri, bir metin dosyasında saklanmaktadır.(`C:\LibraryManagementData\Library1.txt `).
-- Uygulamadan çıkış yapıldığında eklenen bilgiler otomatik olarak kaydedilir.
+- Uygulamada yapılan değişiklikler `Kaydet` seçeneği ile kaydedilir.
+- Uygulamadan çıkış yapıldığında da eklenen bilgiler otomatik olarak kaydedilir.
 ## Geliştirme Aşaması
 - Uygulama içinde `Library`, `Book` ve `Program` adında üç sınıf bulunuyor.
 - `Book` sınıfı, kitabın başlığı, yazarı, ISBN, kopya sayısı, ödünç alındığı tarih ve ödünç alınan kopya sayısı gibi bilgileri içerir. Bu sınıfın nesneleri, `Library` sınıfındaki listelerde kullanılarak kütüphane yönetimi işlemlerini gerçekleştirir.
